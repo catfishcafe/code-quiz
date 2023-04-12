@@ -1,1 +1,7 @@
-style.css
+/*remember how css works*/
+
+body {
+    background-color: rgb(51, 51, 51);
+    color: rgb(160, 160, 160);
+    font-family: Verdana, Geneva, sans-serif;
+}
