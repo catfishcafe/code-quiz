@@ -42,9 +42,31 @@ p{
 #start{
     height: 75px;
     width: 200px;
-    background-color:rgb(0, 255, 76);
+    background-color:rgb(124, 0, 161);
     font-size: 2rem;
     display: inline;
     border-radius: 40px;
     /*How do I get the border radius to look good :/ */
+}
+
+#start:hover{
+    background-color:rgb(0, 255, 76);
+}
+
+.answer-btns{
+    margin-top: 5%;
+}
+
+.answer{
+    height: 50px;
+    width: fit-content;
+    background-color: rgb(195, 0, 255);
+    font-size: 1rem;
+    border-radius: 25px;
+    display: block;
+
+}
+
+.answer:hover{
+    background-color: rgb(221, 108, 255);
 }
