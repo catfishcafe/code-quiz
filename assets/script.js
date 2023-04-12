@@ -17,3 +17,9 @@
 //The questions and answers themselves need to be selected by an array, like "if(q1){div content = question 1 content}", and then both the question and the multiple choice buttons will be given the appropriate content.
 
 //end screen has to have some buttons I guess
+
+//something something local storage something something
+
+//make sure you can define web api and know how to traverse the dom
+
+//write questions
