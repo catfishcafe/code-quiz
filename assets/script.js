@@ -1,1 +1,3 @@
-script.js
+//create an outer function
+
+//
