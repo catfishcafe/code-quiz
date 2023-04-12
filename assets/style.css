@@ -1,1 +1,52 @@
-style.css
+/*remember how css works*/
+
+body {
+    background-color: rgb(51, 51, 51);
+    font-family: Verdana, Geneva, sans-serif;
+    margin: 0;
+    color:rgb(224, 224, 224);
+}
+
+header{
+    display: flex;
+    justify-content: space-between;
+    background-color: rgb(36, 36, 36);
+    padding: 1%;
+    color: rgb(160, 160, 160);
+}
+
+h1{
+    font-size: 1rem;
+    display: inline;
+}
+
+main{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+#game{
+    width: 600px;
+    text-align: center;
+    margin-top: 5%;
+}
+
+h2{
+    font-size: 2rem;
+    display: inline;
+}
+
+p{
+    text-align: left;
+}
+
+#start{
+    height: 75px;
+    width: 200px;
+    background-color:rgb(0, 255, 76);
+    font-size: 2rem;
+    display: inline;
+    border-radius: 40px;
+    /*How do I get the border radius to look good :/ */
+}
