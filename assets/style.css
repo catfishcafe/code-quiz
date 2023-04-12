@@ -24,7 +24,7 @@ main{
     align-items: center;
 }
 
-#game{
+div{
     width: 600px;
     text-align: center;
     margin-top: 5%;

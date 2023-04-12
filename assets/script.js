@@ -18,8 +18,12 @@
 
 //end screen has to have some buttons I guess
 
+//need to be able to enter initials
+
 //something something local storage something something
 
 //make sure you can define web api and know how to traverse the dom
 
 //write questions
+
+//while we're on the subject make sure you follow the correct steps to merge because I'm getting tired of these merge conflicts. I'm the only person using this :/
