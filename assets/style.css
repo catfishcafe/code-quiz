@@ -26,9 +26,14 @@ main{
 
 div{
     width: 600px;
-    text-align: center;
     margin-top: 5%;
 }
+
+#start-btn{
+    text-align: center;
+}
+
+#start-game:
 
 h2{
     font-size: 2rem;
@@ -59,12 +64,13 @@ p{
 
 .answer{
     height: 50px;
-    width: fit-content;
+    width: 300px;
     background-color: rgb(195, 0, 255);
     font-size: 1rem;
     border-radius: 25px;
     display: block;
-
+    text-align: left;
+    padding-left: 3%;
 }
 
 .answer:hover{

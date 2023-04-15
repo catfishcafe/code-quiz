@@ -1,5 +1,8 @@
 //create an outer function
 
+var startButton = document.getElementById('#start-btn');
+startButton.onClick
+
 //The basic question format could be a div in the html that displays instead of the start page when the button is pressed...
 
 //As could the results screen
