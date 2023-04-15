@@ -24,10 +24,13 @@ main{
     align-items: center;
 }
 
-#game{
+div{
     width: 600px;
-    text-align: center;
     margin-top: 5%;
+}
+
+#start-screen{
+    text-align: center;
 }
 
 h2{
@@ -39,12 +42,39 @@ p{
     text-align: left;
 }
 
-#start{
+#start-button{
     height: 75px;
     width: 200px;
-    background-color:rgb(0, 255, 76);
+    background-color:rgb(124, 0, 161);
     font-size: 2rem;
     display: inline;
     border-radius: 40px;
     /*How do I get the border radius to look good :/ */
+}
+
+#start:hover{
+    background-color:rgb(0, 255, 76);
+}
+
+.answer-buttons{
+    margin-top: 5%;
+}
+
+.answer{
+    height: 50px;
+    width: 300px;
+    background-color: rgb(195, 0, 255);
+    font-size: 1rem;
+    border-radius: 25px;
+    display: block;
+    text-align: left;
+    padding-left: 3%;
+}
+
+.answer:hover{
+    background-color: rgb(221, 108, 255);
+}
+
+.testButton{
+    background-color: rgb(255, 0, 85);
 }

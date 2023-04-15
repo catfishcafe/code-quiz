@@ -1,4 +1,20 @@
-//create an outer function
+function hideStartScreen(){document.getElementById('start-screen').style.display = 'none';}
+
+document.getElementById('start-button').addEventListener('click', hideStartScreen);
+
+
+//❌BELLOW ARE TEST BUTTONS, MAKE SURE TO DELETE ALL THIS❌
+function hideStartTest(){document.getElementById('start-screen').style.display = 'none';}
+document.getElementById('hideStart').addEventListener('click', hideStartTest);
+
+function hideQTest(){document.getElementById('game-questions').style.display = 'none';}
+document.getElementById('hideQ').addEventListener('click', hideQTest);
+
+function showStartTest(){document.getElementById('start-screen').style.display = 'block';}
+document.getElementById('showStart').addEventListener('click', showStartTest);
+
+function showQTest(){document.getElementById('game-questions').style.display = 'block';}
+document.getElementById('showQ').addEventListener('click', showQTest);
 
 //The basic question format could be a div in the html that displays instead of the start page when the button is pressed...
 
@@ -17,3 +33,13 @@
 //The questions and answers themselves need to be selected by an array, like "if(q1){div content = question 1 content}", and then both the question and the multiple choice buttons will be given the appropriate content.
 
 //end screen has to have some buttons I guess
+
+//need to be able to enter initials
+
+//something something local storage something something
+
+//make sure you can define web api and know how to traverse the dom
+
+//write questions
+
+//while we're on the subject make sure you follow the correct steps to merge because I'm getting tired of these merge conflicts. I'm the only person using this :/
