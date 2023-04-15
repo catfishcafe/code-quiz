@@ -56,7 +56,7 @@ p{
     background-color:rgb(0, 255, 76);
 }
 
-.answer-btns{
+.answer-buttons{
     margin-top: 5%;
 }
 
@@ -75,6 +75,6 @@ p{
     background-color: rgb(221, 108, 255);
 }
 
-.test-buttons{
-    background-color: cyan;
+.testButton{
+    background-color: rgb(255, 0, 85);
 }

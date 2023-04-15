@@ -3,6 +3,19 @@ function hideStartScreen(){document.getElementById('start-screen').style.display
 document.getElementById('start-button').addEventListener('click', hideStartScreen);
 
 
+//❌BELLOW ARE TEST BUTTONS, MAKE SURE TO DELETE ALL THIS❌
+function hideStartTest(){document.getElementById('start-screen').style.display = 'none';}
+document.getElementById('hideStart').addEventListener('click', hideStartTest);
+
+function hideQTest(){document.getElementById('game-questions').style.display = 'none';}
+document.getElementById('hideQ').addEventListener('click', hideQTest);
+
+function showStartTest(){document.getElementById('start-screen').style.display = 'block';}
+document.getElementById('showStart').addEventListener('click', showStartTest);
+
+function showQTest(){document.getElementById('game-questions').style.display = 'block';}
+document.getElementById('showQ').addEventListener('click', showQTest);
+
 //The basic question format could be a div in the html that displays instead of the start page when the button is pressed...
 
 //As could the results screen
