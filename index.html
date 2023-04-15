@@ -11,26 +11,28 @@
         <h1>Timer will go here</h1>
     </header>
     <main>
-        <div id="start-screen">
+        <div id="start-game-prompt">
             <h2>Coding Quiz</h2>
             <p>This is the song that never ends, yes it goes on and on my friends; some people started singing it not knowing what it was, and they will keep on singing it forever just because it is the song that never ends, yes it goes on and on my friends; some people started singing it not knowing what it was, and they will keep on singing it forever just because...</p>
             <button id="start-button">Start</button>
         </div>
-        <div id="game-questions">
-            <h2>Example question</h2>
-            <div class="answer-btns">
-                <button class="answer">A. Answer</button>
-                <button class="answer">B. Answer</button>
-                <button class="answer">C. Answer</button>
-                <button class="answer">D. Answer</button>
+        <div id="game-questions" style="display: none;">
+            <h2 id="game-question"></h2>
+            <div id="answer-buttons">
+                <button class="answer-button">A. <span class='answer-slot' id='ansA'>t</span></button>
+                <button class="answer-button">B. <span class='answer-slot' id='ansB'>e</span></button>
+                <button class="answer-button">C. <span class='answer-slot' id='ansC'>s</span></button>
+                <button class="answer-button">D. <span class='answer-slot' id='ansD'>t</span></button>
             </div>
         </div>
+        <div id="end-game-display" style="display: none;">
+        </div>
     </main>
-    <div id="test-buttons">
-        <button class="testButton" id = hideStart>hide start screen</button>
-        <button class="testButton" id = hideQ>hide question screen</button>
-        <button class="testButton" id = showStart>show start screen</button>
-        <button class="testButton" id = showQ>show question screen</button>
+    <div id="test-buttons" alt="❌DELETE THIS WHOLE SECTION WHEN FINISHED❌">
+        <button class="testButton" id='hideStart'>hide start screen</button>
+        <button class="testButton" id='hideQ'>hide question screen</button>
+        <button class="testButton" id='showStart'>show start screen</button>
+        <button class="testButton" id='showQ'>show question screen</button>
     </div>
 
     <script src="assets/script.js"></script>
