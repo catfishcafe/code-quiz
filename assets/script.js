@@ -1,16 +1,18 @@
-function hideStartScreen(){document.getElementById('start-screen').style.display = 'none';}
+function hideStartDiv(){document.getElementById('start-game-prompt').style.display = 'none';}
 
-document.getElementById('start-button').addEventListener('click', hideStartScreen);
+function showQDiv(){document.getElementById('game-questions').style.display = 'block';}
 
+document.getElementById('start-button').addEventListener('click', hideStartDiv);
+document.getElementById('start-button').addEventListener('click', showQDiv);
 
 //❌BELLOW ARE TEST BUTTONS, MAKE SURE TO DELETE ALL THIS❌
-function hideStartTest(){document.getElementById('start-screen').style.display = 'none';}
+function hideStartTest(){document.getElementById('start-game-prompt').style.display = 'none';}
 document.getElementById('hideStart').addEventListener('click', hideStartTest);
 
 function hideQTest(){document.getElementById('game-questions').style.display = 'none';}
 document.getElementById('hideQ').addEventListener('click', hideQTest);
 
-function showStartTest(){document.getElementById('start-screen').style.display = 'block';}
+function showStartTest(){document.getElementById('start-game-prompt').style.display = 'block';}
 document.getElementById('showStart').addEventListener('click', showStartTest);
 
 function showQTest(){document.getElementById('game-questions').style.display = 'block';}
