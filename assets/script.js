@@ -3,16 +3,11 @@ function showQDiv(){document.getElementById('game-questions').style.display = 'b
 
 document.getElementById('start-button').addEventListener('click', hideStartDiv);
 document.getElementById('start-button').addEventListener('click', showQDiv);
-document.getElementById('start-button').addEventListener('click', populateAnswers);
+// document.getElementById('start-button').addEventListener('click', populateAnswers);
 
-//❌Do I want to combine those two functions into one so that I only need one line to call it? I think yes but I don't wnat to rock the boat rn :/
+//❌Do I want to combine those two functions into one so that I only need one line to call it? I think yes but I don't wnat to rock the boat rn :/ also maybe not bcs I also need to add a function for that button to populate the answer slot
 
-const gameQBlank = document.getElementById('game-question');
-let A = document.getElementById('ansA').textContent;
-let B = document.getElementById('ansB').textContent;
-let C = document.getElementById('ansC').textContent;
-let D = document.getElementById('ansD').textContent;
-let answerSlots = [A, B, C, D, 'E'];
+const gameQText = document.getElementById('game-question');
 
 let displayedQ = {
     gameQ: '',
@@ -35,33 +30,51 @@ q3 = {
 };
 
 q4 = {
-    gameQ: 'Which of these is not a fish?',
-    thisQAnswers: ['shark', 'tuna', 'salmon', 'dolphin']
+    gameQ: 'Which of these is not a chapter the Fellowship of the Ring?',
+    thisQAnswers: ['Strider', 'Lothlórien', 'Many Meetings', 'Second Breakfast']
 };
 
 q5 = {
-    gameQ: "Why can't I think of another example question?",
-    thisQAnswers: ['idk', 'beats me', 'try harder', 'lol']
+    gameQ: "Which of these is the worst Fire Emblem spinoff?",
+    thisQAnswers: ['Warriors', 'Heroes', 'TMS', 'Super Smash Brothers']
 };
 
 let allQA = [q1, q2, q3, q4, q5];
-
 let randomIndex = Math.floor(Math.random()*allQA.length);
-
 displayedQ = allQA[randomIndex];
 
 console.log ('current question: ' + displayedQ.gameQ);
 console.log ('current answers: ' + displayedQ.thisQAnswers);
 
-// gameQBlank.textContent = displayedQuestion.gameQ;
+gameQText.textContent = displayedQ.gameQ;
+// 
+//     answerSlots = 
+// };
 
+//❌This is an ✨ARRAY✨ of all the text areas where the questions will go
+let answerSlots = document.getElementsByTagName('span');
 
+console.log(answerSlots[0].textContent);
 
-
-function populateAnswers(){
-    if(A = ''){A = Q1answers[ranodmIndex]} else if(B = ''){B = Q1answers[ranodmIndex]} else if(C = ''){C = Q1answers[ranodmIndex]} else {D = Q1answers[ranodmIndex];
-    };
+//❌ I am looping through the empty answer slots and plunking in each answer
+for (i = 0; i < answerSlots.length; i++){
+    answerSlots[i].textContent = displayedQ.thisQAnswers[i]
 };
+
+
+
+// const gameQText = document.getElementById('game-question');
+// let A = document.getElementById('ansA').textContent;
+// let B = document.getElementById('ansB').textContent;
+// let C = document.getElementById('ansC').textContent;
+// let D = document.getElementById('ansD').textContent;
+// const answerSlots = [A, B, C, D];
+
+
+// function populateAnswers(){
+//     if(A = ''){A = Q1answers[ranodmIndex]} else if(B = ''){B = Q1answers[ranodmIndex]} else if(C = ''){C = Q1answers[ranodmIndex]} else {D = Q1answers[ranodmIndex];
+//     };
+// };
 
 const answerButtonsDiv = document.getElementById('answer-buttons');
 

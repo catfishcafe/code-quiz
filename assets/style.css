@@ -52,7 +52,7 @@ p{
     /*How do I get the border radius to look good :/ */
 }
 
-#start:hover{
+#start-button:hover{
     background-color:rgb(0, 255, 76);
 }
 
@@ -71,7 +71,7 @@ p{
     padding-left: 3%;
 }
 
-.answer:hover{
+.answer-button:hover{
     background-color: rgb(221, 108, 255);
 }
 
