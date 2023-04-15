@@ -29,11 +29,9 @@ div{
     margin-top: 5%;
 }
 
-#start-btn{
+#start-screen{
     text-align: center;
 }
-
-#start-game:
 
 h2{
     font-size: 2rem;
@@ -44,7 +42,7 @@ p{
     text-align: left;
 }
 
-#start{
+#start-button{
     height: 75px;
     width: 200px;
     background-color:rgb(124, 0, 161);
@@ -75,4 +73,8 @@ p{
 
 .answer:hover{
     background-color: rgb(221, 108, 255);
+}
+
+.test-buttons{
+    background-color: cyan;
 }

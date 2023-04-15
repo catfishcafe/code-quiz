@@ -1,7 +1,7 @@
-//create an outer function
+function hideStartScreen(){document.getElementById('start-screen').style.display = 'none';}
 
-var startButton = document.getElementById('#start-btn');
-startButton.onClick
+document.getElementById('start-button').addEventListener('click', hideStartScreen);
+
 
 //The basic question format could be a div in the html that displays instead of the start page when the button is pressed...
 
