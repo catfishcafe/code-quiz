@@ -82,21 +82,33 @@ const ansButtons = document.getElementById('answer-button');
 //❌if this returns true, then the correct answer is displayed in the first slot
 
 const correctAnswer = displayedQ.thisQAnswers[0];
+const ansCheckSpace = document.getElementById('right-wrong');
+console.log(ansCheckSpace.textContent);
+
+let sayCorrect = function(){
+    ansCheckSpace.textContent = '✨✔️✨';
+}
+let sayIncorrect = function(){
+ ansCheckSpace.textContent = '❌';
+}
 
 
     let selectedAns = '';
-    document.querySelector('#button-A').addEventListener('click', function() {
-        selectedAns = document.querySelector('#ansA').textContent;
-        if(selectedAns === correctAnswer){console.log('✔️')} else {console.log('❌')};
+    document.getElementById('button-A').addEventListener('click', function() {
+        selectedAns = document.getElementById('ansA').textContent;
+        if(selectedAns === correctAnswer){sayCorrect()} else {sayIncorrect()};
     });
-    document.querySelector('#button-B').addEventListener('click', function() {
-        selectedAns = document.querySelector('#ansB').textContent;
+    document.getElementById('button-B').addEventListener('click', function() {
+        selectedAns = document.getElementById('ansB').textContent;
+        if(selectedAns === correctAnswer){sayCorrect()} else {sayIncorrect()};
     });
-    document.querySelector('#button-C').addEventListener('click', function() {
-        selectedAns = document.querySelector('#ansC').textContent;
+    document.getElementById('button-C').addEventListener('click', function() {
+        selectedAns = document.getElementById('ansC').textContent;
+        if(selectedAns === correctAnswer){sayCorrect()} else {sayIncorrect()};
     });
-    document.querySelector('#button-D').addEventListener('click', function() {
-        selectedAns = document.querySelector('#ansD').textContent;
+    document.getElementById('button-D').addEventListener('click', function() {
+        selectedAns = document.getElementById('ansD').textContent;
+        if(selectedAns === correctAnswer){sayCorrect()} else {sayIncorrect()};
     });
     console.log(selectedAns);
 
