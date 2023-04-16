@@ -3,80 +3,105 @@ function showQDiv(){document.getElementById('game-questions').style.display = 'b
 
 document.getElementById('start-button').addEventListener('click', hideStartDiv);
 document.getElementById('start-button').addEventListener('click', showQDiv);
-// document.getElementById('start-button').addEventListener('click', populateAnswers);
 
 //❌Do I want to combine those two functions into one so that I only need one line to call it? I think yes but I don't wnat to rock the boat rn :/ also maybe not bcs I also need to add a function for that button to populate the answer slot
 
+//This gets the h2 element where each question will display
 const gameQText = document.getElementById('game-question');
 
+//empty variable that will be passed the information to display questions randomly
 let displayedQ = {
     gameQ: '',
     thisQAnswers: [],
 }
 
-q1 = {
+//Below: variables containing all the questions and arrays of their corresponding answer options as properties. The correct answer is always the first in the array. (The answers will later be assigned random slots, but these arrays will remain constant.)
+
+const q1 = {
     gameQ:  'If a property of an object is a function, that property is called a:',
     thisQAnswers: ['method', 'variable', 'argument', 'index']
 };
 
-q2 = {
-    gameQ: 'Which of these is not an animal?',
-    thisQAnswers: ['cat', 'fish', 'bird', 'cinderblock']
+const q2 = {
+    gameQ: 'The symbol for an ID selector is:',
+    thisQAnswers: ['#', '.', '$', '%']
 };
 
-q3 = {
-    gameQ: 'Which these is not a color?',
-    thisQAnswers: ['mauve', 'puce', 'fucsia', 'oxygen']
+const q3 = {
+    gameQ: 'Which of these is my favorite video game?',
+    thisQAnswers: ['LoZ: Breath of the Wild', 'Fire Emblem: The Blazing Blade', 'Pokemon Ultra Moon', 'Universal Paperclips']
 };
 
-q4 = {
+const q4 = {
     gameQ: 'Which of these is not a chapter the Fellowship of the Ring?',
-    thisQAnswers: ['Strider', 'Lothlórien', 'Many Meetings', 'Second Breakfast']
+    thisQAnswers: ['Second Breakfast', 'Strider', 'Lothlórien', 'Many Meetings']
 };
 
-q5 = {
+const q5 = {
     gameQ: "Which of these is the worst Fire Emblem spinoff?",
-    thisQAnswers: ['Warriors', 'Heroes', 'TMS', 'Super Smash Brothers']
+    thisQAnswers: ['Heroes', 'Warriors', 'TMS', 'Super Smash Brothers']
 };
 
+//an array of all the question variables
 let allQA = [q1, q2, q3, q4, q5];
-let randomIndex = Math.floor(Math.random()*allQA.length);
-displayedQ = allQA[randomIndex];
 
-console.log ('current question: ' + displayedQ.gameQ);
-console.log ('current answers: ' + displayedQ.thisQAnswers);
+//shuffle function found at https://stackoverflow.com/questions/2450954/how-to-randomize-shuffle-a-javascript-array
+function shuffle(array) {
+    let currentIndex = array.length,  randomIndex;
+    while (currentIndex != 0) {
+    randomIndex = Math.floor(Math.random() * currentIndex);
+      currentIndex--;
+      [array[currentIndex], array[randomIndex]] = [
+        array[randomIndex], array[currentIndex]];
+    }
+    return array;
+  }
+  
+//allQA array is shuffled
+shuffle(allQA);
 
+//❌Now displayedQ has value of whichever q variable was shuffled to the front of the allQA array
+displayedQ = allQA[0];
+
+//gets the actual words of the question from displayedQ and displays them in the H2 text space 
 gameQText.textContent = displayedQ.gameQ;
-// 
-//     answerSlots = 
-// };
 
-//❌This is an ✨ARRAY✨ of all the text areas where the questions will go
-let answerSlots = document.getElementsByTagName('span');
+//all of the spans where the answers will go are grabbed and put in an array, and then that array is shuffled
+//❌I think I should put this all in one function but I don't know how :(
+let answerSlots = document.getElementsByClassName('answer-slot');
+ansSlotsArray = [answerSlots[0], answerSlots[1], answerSlots[2], answerSlots[3]]; 
+shuffle(ansSlotsArray);
 
-console.log(answerSlots[0].textContent);
-
-//❌ I am looping through the empty answer slots and plunking in each answer
-for (i = 0; i < answerSlots.length; i++){
-    answerSlots[i].textContent = displayedQ.thisQAnswers[i]
+//loops through the shuffled array above and puts each answer option in one of the empty areas
+for (i = 0; i < ansSlotsArray.length; i++){
+    ansSlotsArray[i].textContent = displayedQ.thisQAnswers[i]
 };
 
+const ansButtons = document.getElementById('answer-button');
+
+//❌if this returns true, then the correct answer is displayed in the first slot
+
+const correctAnswer = displayedQ.thisQAnswers[0];
 
 
-// const gameQText = document.getElementById('game-question');
-// let A = document.getElementById('ansA').textContent;
-// let B = document.getElementById('ansB').textContent;
-// let C = document.getElementById('ansC').textContent;
-// let D = document.getElementById('ansD').textContent;
-// const answerSlots = [A, B, C, D];
+    let selectedAns = '';
+    document.querySelector('#button-A').addEventListener('click', function() {
+        selectedAns = document.querySelector('#ansA').textContent;
+        if(selectedAns === correctAnswer){console.log('✔️')} else {console.log('❌')};
+    });
+    document.querySelector('#button-B').addEventListener('click', function() {
+        selectedAns = document.querySelector('#ansB').textContent;
+    });
+    document.querySelector('#button-C').addEventListener('click', function() {
+        selectedAns = document.querySelector('#ansC').textContent;
+    });
+    document.querySelector('#button-D').addEventListener('click', function() {
+        selectedAns = document.querySelector('#ansD').textContent;
+    });
+    console.log(selectedAns);
 
 
-// function populateAnswers(){
-//     if(A = ''){A = Q1answers[ranodmIndex]} else if(B = ''){B = Q1answers[ranodmIndex]} else if(C = ''){C = Q1answers[ranodmIndex]} else {D = Q1answers[ranodmIndex];
-//     };
-// };
 
-const answerButtonsDiv = document.getElementById('answer-buttons');
 
 
 //❌BELLOW ARE TEST BUTTONS, MAKE SURE TO DELETE ALL THIS, AND DELETE THE HTML AND CSS❌
