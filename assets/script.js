@@ -1,5 +1,10 @@
-function hideStartDiv(){document.getElementById('start-game-prompt').style.display = 'none';}
-function showQDiv(){document.getElementById('game-questions').style.display = 'block';}
+function hideStartDiv() {
+    document.getElementById('start-game-prompt').style.display = 'none';
+}
+
+function showQDiv() {
+    document.getElementById('game-questions').style.display = 'block';
+}
 
 document.getElementById('start-button').addEventListener('click', hideStartDiv);
 document.getElementById('start-button').addEventListener('click', showQDiv);
@@ -42,8 +47,13 @@ const q5 = {
     thisQAnswers: ['Heroes', 'Warriors', 'TMS', 'Super Smash Brothers']
 };
 
+const q6 = {
+    gameQ: "Which of these is not a Weird Al song?",
+    thisQAnswers: ['Dark Lord Funk', "Don't Download This Song", 'Tacky', 'Word Crimes']
+};
+
 //an array of all the question variables
-let allQA = [q1, q2, q3, q4, q5];
+let allQA = [q1, q2, q3, q4, q5, q6];
 
 //shuffle function found at https://stackoverflow.com/questions/2450954/how-to-randomize-shuffle-a-javascript-array
 function shuffle(array) {
@@ -61,7 +71,9 @@ function shuffle(array) {
 shuffle(allQA);
 
 //❌Now displayedQ has value of whichever q variable was shuffled to the front of the allQA array
-displayedQ = allQA[0];
+
+let x = 0;
+displayedQ = allQA[x];
 
 //gets the actual words of the question from displayedQ and displays them in the H2 text space 
 gameQText.textContent = displayedQ.gameQ;
@@ -77,42 +89,68 @@ for (i = 0; i < ansSlotsArray.length; i++){
     ansSlotsArray[i].textContent = displayedQ.thisQAnswers[i]
 };
 
+var nextButton = document.getElementById('next-question');
+
+nextButton.addEventListener(
+    'click', function() {
+        if (x < allQA.length -1){
+            x = x+1;
+            displayedQ = allQA[x];
+            console.log(allQA[x]);
+            gameQText.textContent = displayedQ.gameQ;
+            let answerSlots = document.getElementsByClassName('answer-slot');ansSlotsArray = [answerSlots[0], answerSlots[1], answerSlots[2], answerSlots[3]]; 
+            shuffle(ansSlotsArray);
+            for (i = 0; i < ansSlotsArray.length; i++){
+                ansSlotsArray[i].textContent = displayedQ.thisQAnswers[i]
+            };
+        } else {
+            document.getElementById('game-questions').style.display = 'none';
+            document.getElementById('end-game-display').style.dsiplay = 'block'
+        };
+        if(displayedQ == allQA[allQA.length-1]){
+            nextButton.textContent = 'End'
+        }
+    }
+);
+
 const ansButtons = document.getElementById('answer-button');
-
-//❌if this returns true, then the correct answer is displayed in the first slot
-
 const correctAnswer = displayedQ.thisQAnswers[0];
 const ansCheckSpace = document.getElementById('right-wrong');
-console.log(ansCheckSpace.textContent);
 
-let sayCorrect = function(){
-    ansCheckSpace.textContent = '✨✔️✨';
-}
-let sayIncorrect = function(){
- ansCheckSpace.textContent = '❌';
-}
+let sayCorrect = function(){ansCheckSpace.textContent = '✨✔️✨';}
+let sayIncorrect = function(){ansCheckSpace.textContent = '❌';}
 
+let buttonA = document.getElementById('button-A');
+let buttonB = document.getElementById('button-B');
+let buttonC = document.getElementById('button-C');
+let buttonD = document.getElementById('button-D');
+
+let allButtons = document.getElementsByClassName('answer-button');
+//❌So with this I'd like to make it so that whenever any button is pressed, the button with the correct answer turns green; somehow I need to say "if any button's text content is equal to the correct answer, THAT BUTTON turns green"
+
+//allButtons.addEventListener('click', showNextQButton());
+function showNextButton(){nextButton.style.display = 'inline'};
 
     let selectedAns = '';
-    document.getElementById('button-A').addEventListener('click', function() {
+    buttonA.addEventListener('click', function() {
+        showNextButton();
         selectedAns = document.getElementById('ansA').textContent;
-        if(selectedAns === correctAnswer){sayCorrect()} else {sayIncorrect()};
+        if(selectedAns === correctAnswer){sayCorrect(); buttonA.style.background='rgb(0, 255, 76)';} else {sayIncorrect(); buttonA.style.background='rgb(255, 0, 85)';};
     });
     document.getElementById('button-B').addEventListener('click', function() {
         selectedAns = document.getElementById('ansB').textContent;
-        if(selectedAns === correctAnswer){sayCorrect()} else {sayIncorrect()};
+        if(selectedAns === correctAnswer){sayCorrect(); buttonB.style.background='rgb(0, 255, 76)';} else {sayIncorrect(); buttonB.style.background='rgb(255, 0, 85)';};
     });
     document.getElementById('button-C').addEventListener('click', function() {
         selectedAns = document.getElementById('ansC').textContent;
-        if(selectedAns === correctAnswer){sayCorrect()} else {sayIncorrect()};
+        if(selectedAns === correctAnswer){sayCorrect(); buttonC.style.background='rgb(0, 255, 76)';} else {sayIncorrect(); buttonC.style.background='rgb(255, 0, 85)';};
     });
     document.getElementById('button-D').addEventListener('click', function() {
         selectedAns = document.getElementById('ansD').textContent;
-        if(selectedAns === correctAnswer){sayCorrect()} else {sayIncorrect()};
+        if(selectedAns === correctAnswer){sayCorrect(); buttonD.style.background='rgb(0, 255, 76)';} else {sayIncorrect(); buttonD.style.background='rgb(255, 0, 85)';};
     });
-    console.log(selectedAns);
-
-
+ 
+//STOP
 
 
 
@@ -129,11 +167,6 @@ document.getElementById('showStart').addEventListener('click', showStartTest);
 function showQTest(){document.getElementById('game-questions').style.display = 'block';}
 document.getElementById('showQ').addEventListener('click', showQTest);
 
-//❌The basic question format could be a div in the html that displays instead of the start page when the button is pressed...
-
-//❌As could the results screen
-
-//❌And the high score screen
 
 //❌The "high score" text in the header then needs to show the high score instead of the questions div or anything else
 

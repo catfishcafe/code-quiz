@@ -75,6 +75,21 @@ p{
     background-color: rgb(221, 108, 255);
 }
 
+#next-question{
+    height: 30px;
+    width: fit-content;
+    background-color: rgb(195, 0, 255);
+    font-size: 1rem;
+    border-radius: 25px;
+    padding-left: 3%;
+    padding-right: 3%;
+    margin-left: 5%;
+}
+
+#next-question:hover{
+    background-color: rgb(221, 108, 255);
+}
+
 /*❌DELETE THIS WHEN FINISHED❌*/
 .testButton{
     background-color: rgb(255, 0, 85);
