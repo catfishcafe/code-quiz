@@ -89,7 +89,8 @@ for (i = 0; i < ansSlotsArray.length; i++){
     ansSlotsArray[i].textContent = displayedQ.thisQAnswers[i]
 };
 
-var nextButton = document.getElementById('next-question');
+let nextButton = document.getElementById('next-question');
+let answerButtons = document.getElementsByClassName('answer-button');
 
 nextButton.addEventListener(
     'click', function() {
@@ -103,6 +104,9 @@ nextButton.addEventListener(
             for (i = 0; i < ansSlotsArray.length; i++){
                 ansSlotsArray[i].textContent = displayedQ.thisQAnswers[i]
             };
+            for (i = 0; i < answerButtons.length; i++){
+                answerButtons[i].style.background = 'rgb(195, 0, 255)'
+            }
         } else {
             document.getElementById('game-questions').style.display = 'none';
             document.getElementById('end-game-display').style.dsiplay = 'block'
@@ -131,27 +135,29 @@ let allButtons = document.getElementsByClassName('answer-button');
 //allButtons.addEventListener('click', showNextQButton());
 function showNextButton(){nextButton.style.display = 'inline'};
 
-    let selectedAns = '';
-    buttonA.addEventListener('click', function() {
-        showNextButton();
-        selectedAns = document.getElementById('ansA').textContent;
-        if(selectedAns === correctAnswer){sayCorrect(); buttonA.style.background='rgb(0, 255, 76)';} else {sayIncorrect(); buttonA.style.background='rgb(255, 0, 85)';};
-    });
-    document.getElementById('button-B').addEventListener('click', function() {
-        selectedAns = document.getElementById('ansB').textContent;
-        if(selectedAns === correctAnswer){sayCorrect(); buttonB.style.background='rgb(0, 255, 76)';} else {sayIncorrect(); buttonB.style.background='rgb(255, 0, 85)';};
-    });
-    document.getElementById('button-C').addEventListener('click', function() {
-        selectedAns = document.getElementById('ansC').textContent;
-        if(selectedAns === correctAnswer){sayCorrect(); buttonC.style.background='rgb(0, 255, 76)';} else {sayIncorrect(); buttonC.style.background='rgb(255, 0, 85)';};
-    });
-    document.getElementById('button-D').addEventListener('click', function() {
-        selectedAns = document.getElementById('ansD').textContent;
-        if(selectedAns === correctAnswer){sayCorrect(); buttonD.style.background='rgb(0, 255, 76)';} else {sayIncorrect(); buttonD.style.background='rgb(255, 0, 85)';};
-    });
- 
-//STOP
+ let selectedAns = '';
 
+ buttonA.addEventListener('click', function() {
+    showNextButton();
+    selectedAns = buttonA.textContent;
+    if(selectedAns === correctAnswer){
+        sayCorrect(); 
+        buttonA.style.background='rgb(0, 255, 76)';} else{
+            sayIncorrect();
+            buttonA.style.background='rgb(255, 0, 85)';};
+});
+document.getElementById('button-B').addEventListener('click', function() {
+    selectedAns = document.getElementById('ansB').textContent;
+    if(selectedAns === correctAnswer){sayCorrect(); buttonB.style.background='rgb(0, 255, 76)';} else {sayIncorrect(); buttonB.style.background='rgb(255, 0, 85)';};
+});
+document.getElementById('button-C').addEventListener('click', function() {
+    selectedAns = document.getElementById('ansC').textContent;
+    if(selectedAns === correctAnswer){sayCorrect(); buttonC.style.background='rgb(0, 255, 76)';} else {sayIncorrect(); buttonC.style.background='rgb(255, 0, 85)';};
+});
+    document.getElementById('button-D').addEventListener('click', function() {
+    selectedAns = document.getElementById('ansD').textContent;
+    if(selectedAns === correctAnswer){sayCorrect(); buttonD.style.background='rgb(0, 255, 76)';} else {sayIncorrect(); buttonD.style.background='rgb(255, 0, 85)';};
+});
 
 
 //❌BELLOW ARE TEST BUTTONS, MAKE SURE TO DELETE ALL THIS, AND DELETE THE HTML AND CSS❌
