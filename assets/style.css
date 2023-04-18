@@ -90,6 +90,10 @@ p{
     background-color: rgb(221, 108, 255);
 }
 
+img{
+    width: 400px;
+}
+
 /*❌DELETE THIS WHEN FINISHED❌*/
 .testButton{
     background-color: rgb(255, 0, 85);
