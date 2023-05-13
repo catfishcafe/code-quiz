@@ -1,5 +1,10 @@
-function hideStartDiv(){document.getElementById('start-game-prompt').style.display = 'none';}
-function showQDiv(){document.getElementById('game-questions').style.display = 'block';}
+function hideStartDiv() {
+    document.getElementById('start-game-prompt').style.display = 'none';
+}
+
+function showQDiv() {
+    document.getElementById('game-questions').style.display = 'block';
+}
 
 document.getElementById('start-button').addEventListener('click', hideStartDiv);
 document.getElementById('start-button').addEventListener('click', showQDiv);
@@ -17,14 +22,24 @@ let displayedQ = {
 
 //Below: variables containing all the questions and arrays of their corresponding answer options as properties. The correct answer is always the first in the array. (The answers will later be assigned random slots, but these arrays will remain constant.)
 
+// const q1 = {
+//     gameQ:  'If a property of an object is a function, that property is called a:',
+//     thisQAnswers: ['method', 'variable', 'argument', 'index']
+// };
+
+// const q2 = {
+//     gameQ: 'The symbol for an ID selector is:',
+//     thisQAnswers: ['#', '.', '$', '%']
+// };
+
 const q1 = {
-    gameQ:  'If a property of an object is a function, that property is called a:',
-    thisQAnswers: ['method', 'variable', 'argument', 'index']
+    gameQ: 'Which of these is not good for pets to chew on?',
+    thisQAnswers: ['Sweet Pea', 'Snap Pea', 'Sugar Pea', 'Green Pea']
 };
 
 const q2 = {
-    gameQ: 'The symbol for an ID selector is:',
-    thisQAnswers: ['#', '.', '$', '%']
+    gameQ: 'Where is the language sometimes called Runglish spoken?',
+    thisQAnswers: ['Outer Space', 'Romania', 'Canada', 'Hawaii']
 };
 
 const q3 = {
@@ -33,17 +48,22 @@ const q3 = {
 };
 
 const q4 = {
-    gameQ: 'Which of these is not a chapter the Fellowship of the Ring?',
-    thisQAnswers: ['Second Breakfast', 'Strider', 'Lothlórien', 'Many Meetings']
+    gameQ: 'Which of these is not a quote from the Lord of the Rings film triology?',
+    thisQAnswers: ['Duck, Mr. Frodo!', 'Manflesh.', 'It comes in pints?', 'Mushrooms!']
 };
 
 const q5 = {
-    gameQ: "Which of these is the worst Fire Emblem spinoff?",
-    thisQAnswers: ['Heroes', 'Warriors', 'TMS', 'Super Smash Brothers']
+    gameQ: "Which of these is the best class in Fire Emblem?",
+    thisQAnswers: ["Dancer (I'll fight you on this)", 'Lord', 'Archer', 'Mercenary']
+};
+
+const q6 = {
+    gameQ: "Which of these is not a Weird Al song?",
+    thisQAnswers: ["Canada's Really Big", "Don't Download This Song", 'Tacky', 'Word Crimes']
 };
 
 //an array of all the question variables
-let allQA = [q1, q2, q3, q4, q5];
+let allQA = [q1, q2, q3, q4, q5, q6];
 
 //shuffle function found at https://stackoverflow.com/questions/2450954/how-to-randomize-shuffle-a-javascript-array
 function shuffle(array) {
@@ -61,7 +81,8 @@ function shuffle(array) {
 shuffle(allQA);
 
 //❌Now displayedQ has value of whichever q variable was shuffled to the front of the allQA array
-displayedQ = allQA[0];
+let x = 0;
+displayedQ = allQA[x];
 
 //gets the actual words of the question from displayedQ and displays them in the H2 text space 
 gameQText.textContent = displayedQ.gameQ;
@@ -77,44 +98,127 @@ for (i = 0; i < ansSlotsArray.length; i++){
     ansSlotsArray[i].textContent = displayedQ.thisQAnswers[i]
 };
 
-const ansButtons = document.getElementById('answer-button');
-
-//❌if this returns true, then the correct answer is displayed in the first slot
-
-const correctAnswer = displayedQ.thisQAnswers[0];
+const nextButton = document.getElementById('next-question');
+const answerButtons = document.getElementsByClassName('answer-button');
 const ansCheckSpace = document.getElementById('right-wrong');
-console.log(ansCheckSpace.textContent);
 
-let sayCorrect = function(){
-    ansCheckSpace.textContent = '✨✔️✨';
-}
-let sayIncorrect = function(){
- ansCheckSpace.textContent = '❌';
-}
+let correctAnswer = displayedQ.thisQAnswers[0];
+let selectedAns = '';
+let sayCorrect = function(){ansCheckSpace.textContent = '✨✔️✨'};
+let sayIncorrect = function(){ansCheckSpace.textContent = '❌'};
+let clearRightWrong = function(){ansCheckSpace.textContent = ''};
+let buttonA = document.getElementById('button-A');
+let buttonB = document.getElementById('button-B');
+let buttonC = document.getElementById('button-C');
+let buttonD = document.getElementById('button-D');
+
+let allButtons = document.getElementsByClassName('answer-button');
+//❌So with this I'd like to make it so that whenever any button is pressed, the button with the correct answer turns green; somehow I need to say "if any button's text content is equal to the correct answer, THAT BUTTON turns green"
 
 
-    let selectedAns = '';
-    document.getElementById('button-A').addEventListener('click', function() {
-        selectedAns = document.getElementById('ansA').textContent;
-        if(selectedAns === correctAnswer){sayCorrect()} else {sayIncorrect()};
-    });
-    document.getElementById('button-B').addEventListener('click', function() {
-        selectedAns = document.getElementById('ansB').textContent;
-        if(selectedAns === correctAnswer){sayCorrect()} else {sayIncorrect()};
-    });
-    document.getElementById('button-C').addEventListener('click', function() {
-        selectedAns = document.getElementById('ansC').textContent;
-        if(selectedAns === correctAnswer){sayCorrect()} else {sayIncorrect()};
-    });
-    document.getElementById('button-D').addEventListener('click', function() {
-        selectedAns = document.getElementById('ansD').textContent;
-        if(selectedAns === correctAnswer){sayCorrect()} else {sayIncorrect()};
-    });
+//I think is is only running once and that's why on subsequent screens the buttons don't know if they're correct or not
+
+//Things I need the next button to do:
+//-Increase the value of x by 1 up to end of array
+//-display the updated dispayedQ
+//-turn all buttons back to purple
+//-empty the text from the bottom div
+//-hide itself (it will reappear when next question button is clicked)
+//-change to say 'end' on the last question
+//-hide the questions div on the last question
+//-unhide the endgame screen on the last question
+//-possibly record right or wrong to local storage
+
+
+
+
+nextButton.addEventListener(
+    'click', function() {
+        clearRightWrong();
+        let hideNextButton = function(){
+            nextButton.style.display = 'none'
+        };
+        hideNextButton();
+        if (x < allQA.length -1){
+            x = x+1;
+            displayedQ = allQA[x];
+            gameQText.textContent = displayedQ.gameQ;
+            shuffle(ansSlotsArray);
+            for (i = 0; i < ansSlotsArray.length; i++){
+                ansSlotsArray[i].textContent = displayedQ.thisQAnswers[i]
+            };
+            for (i = 0; i < answerButtons.length; i++){
+                answerButtons[i].style.background = 'rgb(195, 0, 255)'
+            };
+        } else {
+            document.getElementById('game-questions').style.display = 'none';
+            document.getElementById('end-game-display').style.display = 'block'
+        };
+        if(displayedQ == allQA[allQA.length-1]){
+            nextButton.textContent = 'End'
+        }
+    }
+);
+
+function showNextButton(){nextButton.style.display = 'inline'};
+
+buttonA.addEventListener('click', function() {
+    showNextButton();
+    correctAnswer = displayedQ.thisQAnswers[0];
+    selectedAns = document.getElementById('ansA').textContent;
     console.log(selectedAns);
+    console.log(correctAnswer);
+    if(selectedAns === correctAnswer){
+        console.log('correct');
+        sayCorrect(); 
+        buttonA.style.background='rgb(0, 255, 76)'} else{
+            sayIncorrect();
+            console.log('incorrect');
+            buttonA.style.background='rgb(255, 0, 85)'};
+});
+buttonB.addEventListener('click', function() {
+    showNextButton();
+    correctAnswer = displayedQ.thisQAnswers[0];
+    selectedAns = document.getElementById('ansB').textContent;
+    console.log(selectedAns);
+    console.log(correctAnswer);
+    if(selectedAns === correctAnswer){
+        console.log('correct');
+        sayCorrect(); 
+        buttonB.style.background='rgb(0, 255, 76)'} else{
+            sayIncorrect();
+            console.log('incorrect');
+            buttonB.style.background='rgb(255, 0, 85)'};
+});
+buttonC.addEventListener('click', function() {
+    showNextButton();
+    correctAnswer = displayedQ.thisQAnswers[0];
+    selectedAns = document.getElementById('ansC').textContent;
+    console.log(selectedAns);
+    console.log(correctAnswer);
+    if(selectedAns === correctAnswer){
+        console.log('correct');
+        sayCorrect(); 
+        buttonC.style.background='rgb(0, 255, 76)'} else{
+            sayIncorrect();
+            console.log('incorrect');
+            buttonC.style.background='rgb(255, 0, 85)'};
+});
+buttonD.addEventListener('click', function() {
+    showNextButton();
+    correctAnswer = displayedQ.thisQAnswers[0];
+    selectedAns = document.getElementById('ansD').textContent;
+    console.log(selectedAns);
+    console.log(correctAnswer);
+    if(selectedAns === correctAnswer){
+        console.log('correct');
+        sayCorrect(); 
+        buttonD.style.background='rgb(0, 255, 76)'} else{
+            sayIncorrect();
+            console.log('incorrect');
+            buttonD.style.background='rgb(255, 0, 85)'};
 
-
-
-
+});
 
 //❌BELLOW ARE TEST BUTTONS, MAKE SURE TO DELETE ALL THIS, AND DELETE THE HTML AND CSS❌
 function hideStartTest(){document.getElementById('start-game-prompt').style.display = 'none';}
@@ -129,11 +233,6 @@ document.getElementById('showStart').addEventListener('click', showStartTest);
 function showQTest(){document.getElementById('game-questions').style.display = 'block';}
 document.getElementById('showQ').addEventListener('click', showQTest);
 
-//❌The basic question format could be a div in the html that displays instead of the start page when the button is pressed...
-
-//❌As could the results screen
-
-//❌And the high score screen
 
 //❌The "high score" text in the header then needs to show the high score instead of the questions div or anything else
 
