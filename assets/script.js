@@ -33,37 +33,27 @@ let displayedQ = {
 // };
 
 const q1 = {
-    gameQ: 'Which of these is not good for pets to chew on?',
-    thisQAnswers: ['Sweet Pea', 'Snap Pea', 'Sugar Pea', 'Green Pea']
+    gameQ: 'Which of these is the worst Fire Emblem spinoff?',
+    thisQAnswers: ['Heroes', 'Warriors', 'TMS', 'Super Smash Bros']
 };
 
 const q2 = {
-    gameQ: 'Where is the language sometimes called Runglish spoken?',
-    thisQAnswers: ['Outer Space', 'Romania', 'Canada', 'Hawaii']
-};
-
-const q3 = {
     gameQ: 'Which of these is my favorite video game?',
     thisQAnswers: ['LoZ: Breath of the Wild', 'Fire Emblem: The Blazing Blade', 'Pokemon Ultra Moon', 'Universal Paperclips']
 };
 
+const q3 = {
+    gameQ: "Why can't I think of another good question?",
+    thisQAnswers: ["Let's just move on", 'idk', 'idk', 'idk']
+};
+
 const q4 = {
-    gameQ: 'Which of these is not a quote from the Lord of the Rings film triology?',
-    thisQAnswers: ['Duck, Mr. Frodo!', 'Manflesh.', 'It comes in pints?', 'Mushrooms!']
-};
-
-const q5 = {
-    gameQ: "Which of these is the best class in Fire Emblem?",
-    thisQAnswers: ["Dancer (I'll fight you on this)", 'Lord', 'Archer', 'Mercenary']
-};
-
-const q6 = {
-    gameQ: "Which of these is not a Weird Al song?",
-    thisQAnswers: ["Canada's Really Big", "Don't Download This Song", 'Tacky', 'Word Crimes']
+    gameQ: "Which of these is not a Daft Punk song?",
+    thisQAnswers: ["I Am Not A Robot", "Digital Love", 'Robot Rock', 'Human After All']
 };
 
 //an array of all the question variables
-let allQA = [q1, q2, q3, q4, q5, q6];
+let allQA = [q1, q2, q3, q4];
 
 //shuffle function found at https://stackoverflow.com/questions/2450954/how-to-randomize-shuffle-a-javascript-array
 function shuffle(array) {
@@ -80,7 +70,7 @@ function shuffle(array) {
 //allQA array is shuffled
 shuffle(allQA);
 
-//❌Now displayedQ has value of whichever q variable was shuffled to the front of the allQA array
+//Now displayedQ has value of whichever q variable was shuffled to the front of the allQA array
 let x = 0;
 displayedQ = allQA[x];
 
@@ -127,10 +117,6 @@ let allButtons = document.getElementsByClassName('answer-button');
 //-change to say 'end' on the last question
 //-hide the questions div on the last question
 //-unhide the endgame screen on the last question
-//-possibly record right or wrong to local storage
-
-
-
 
 nextButton.addEventListener(
     'click', function() {
@@ -162,63 +148,27 @@ nextButton.addEventListener(
 
 function showNextButton(){nextButton.style.display = 'inline'};
 
-buttonA.addEventListener('click', function() {
+function onButtonClick(answerId, button) {
     showNextButton();
     correctAnswer = displayedQ.thisQAnswers[0];
-    selectedAns = document.getElementById('ansA').textContent;
+    selectedAns = document.getElementById(answerId).textContent;
     console.log(selectedAns);
     console.log(correctAnswer);
     if(selectedAns === correctAnswer){
         console.log('correct');
         sayCorrect(); 
-        buttonA.style.background='rgb(0, 255, 76)'} else{
-            sayIncorrect();
-            console.log('incorrect');
-            buttonA.style.background='rgb(255, 0, 85)'};
-});
-buttonB.addEventListener('click', function() {
-    showNextButton();
-    correctAnswer = displayedQ.thisQAnswers[0];
-    selectedAns = document.getElementById('ansB').textContent;
-    console.log(selectedAns);
-    console.log(correctAnswer);
-    if(selectedAns === correctAnswer){
-        console.log('correct');
-        sayCorrect(); 
-        buttonB.style.background='rgb(0, 255, 76)'} else{
-            sayIncorrect();
-            console.log('incorrect');
-            buttonB.style.background='rgb(255, 0, 85)'};
-});
-buttonC.addEventListener('click', function() {
-    showNextButton();
-    correctAnswer = displayedQ.thisQAnswers[0];
-    selectedAns = document.getElementById('ansC').textContent;
-    console.log(selectedAns);
-    console.log(correctAnswer);
-    if(selectedAns === correctAnswer){
-        console.log('correct');
-        sayCorrect(); 
-        buttonC.style.background='rgb(0, 255, 76)'} else{
-            sayIncorrect();
-            console.log('incorrect');
-            buttonC.style.background='rgb(255, 0, 85)'};
-});
-buttonD.addEventListener('click', function() {
-    showNextButton();
-    correctAnswer = displayedQ.thisQAnswers[0];
-    selectedAns = document.getElementById('ansD').textContent;
-    console.log(selectedAns);
-    console.log(correctAnswer);
-    if(selectedAns === correctAnswer){
-        console.log('correct');
-        sayCorrect(); 
-        buttonD.style.background='rgb(0, 255, 76)'} else{
-            sayIncorrect();
-            console.log('incorrect');
-            buttonD.style.background='rgb(255, 0, 85)'};
+        button.style.background='rgb(0, 255, 76)'
+    } else {
+        sayIncorrect();
+        console.log('incorrect');
+        button.style.background='rgb(255, 0, 85)'
+    }
+}
 
-});
+buttonA.addEventListener('click', function() { onButtonClick('ansA', buttonA); });
+buttonB.addEventListener('click', function() { onButtonClick('ansB', buttonB); });
+buttonC.addEventListener('click', function() { onButtonClick('ansC', buttonC); });
+buttonD.addEventListener('click', function() { onButtonClick('ansD', buttonD); });
 
 //❌BELLOW ARE TEST BUTTONS, MAKE SURE TO DELETE ALL THIS, AND DELETE THE HTML AND CSS❌
 function hideStartTest(){document.getElementById('start-game-prompt').style.display = 'none';}
