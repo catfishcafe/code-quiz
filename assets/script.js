@@ -57,7 +57,7 @@ let allQA = [q1, q2, q3, q4];
 
 //shuffle function found at https://stackoverflow.com/questions/2450954/how-to-randomize-shuffle-a-javascript-array
 function shuffle(array) {
-    let currentIndex = array.length,  randomIndex;
+    let currentIndex = array.length, randomIndex;
     while (currentIndex != 0) {
     randomIndex = Math.floor(Math.random() * currentIndex);
       currentIndex--;
@@ -66,11 +66,11 @@ function shuffle(array) {
     }
     return array;
   }
-  
-//allQA array is shuffled
+
 shuffle(allQA);
 
 //Now displayedQ has value of whichever q variable was shuffled to the front of the allQA array
+//❌ do I need to define a variable first?? I did this a while ago and I don't remember why I did that
 let x = 0;
 displayedQ = allQA[x];
 
@@ -79,7 +79,7 @@ gameQText.textContent = displayedQ.gameQ;
 
 //all of the spans where the answers will go are grabbed and put in an array, and then that array is shuffled
 //❌I think I should put this all in one function but I don't know how :(
-let answerSlots = document.getElementsByClassName('answer-slot');
+const answerSlots = document.getElementsByClassName('answer-slot');
 ansSlotsArray = [answerSlots[0], answerSlots[1], answerSlots[2], answerSlots[3]]; 
 shuffle(ansSlotsArray);
 
@@ -94,29 +94,13 @@ const ansCheckSpace = document.getElementById('right-wrong');
 
 let correctAnswer = displayedQ.thisQAnswers[0];
 let selectedAns = '';
-let sayCorrect = function(){ansCheckSpace.textContent = '✨✔️✨'};
-let sayIncorrect = function(){ansCheckSpace.textContent = '❌'};
+const sayCorrect = function(){ansCheckSpace.textContent = '✨✔️✨'};
+const sayIncorrect = function(){ansCheckSpace.textContent = '❌'};
 let clearRightWrong = function(){ansCheckSpace.textContent = ''};
-let buttonA = document.getElementById('button-A');
-let buttonB = document.getElementById('button-B');
-let buttonC = document.getElementById('button-C');
-let buttonD = document.getElementById('button-D');
-
-let allButtons = document.getElementsByClassName('answer-button');
-//❌So with this I'd like to make it so that whenever any button is pressed, the button with the correct answer turns green; somehow I need to say "if any button's text content is equal to the correct answer, THAT BUTTON turns green"
-
-
-//I think is is only running once and that's why on subsequent screens the buttons don't know if they're correct or not
-
-//Things I need the next button to do:
-//-Increase the value of x by 1 up to end of array
-//-display the updated dispayedQ
-//-turn all buttons back to purple
-//-empty the text from the bottom div
-//-hide itself (it will reappear when next question button is clicked)
-//-change to say 'end' on the last question
-//-hide the questions div on the last question
-//-unhide the endgame screen on the last question
+const buttonA = document.getElementById('button-A');
+const buttonB = document.getElementById('button-B');
+const buttonC = document.getElementById('button-C');
+const buttonD = document.getElementById('button-D');
 
 nextButton.addEventListener(
     'click', function() {
@@ -148,27 +132,49 @@ nextButton.addEventListener(
 
 function showNextButton(){nextButton.style.display = 'inline'};
 
-function onButtonClick(answerId, button) {
+let ansA = document.getElementById('ansA');
+let ansB = document.getElementById('ansB');
+let ansC = document.getElementById('ansC');
+let ansD = document.getElementById('ansD');
+
+buttonA.onclick = function(){console.log(buttonA.onclick=null)};
+
+function onButtonClick(answerId, inputButton) {
     showNextButton();
     correctAnswer = displayedQ.thisQAnswers[0];
     selectedAns = document.getElementById(answerId).textContent;
-    console.log(selectedAns);
-    console.log(correctAnswer);
+    console.log('selected answer: ', selectedAns);
+    console.log('correct answer: ', correctAnswer);
+//this null thing is nothing. I mean. it doesn't work.
+    buttonA.onClick = null;
+buttonB.onClick = null;
+buttonC.onClick = null;
+buttonD.onClick = null;
     if(selectedAns === correctAnswer){
         console.log('correct');
         sayCorrect(); 
-        button.style.background='rgb(0, 255, 76)'
+        inputButton.style.background='rgb(0, 255, 76)'
     } else {
         sayIncorrect();
         console.log('incorrect');
-        button.style.background='rgb(255, 0, 85)'
+        inputButton.style.background='rgb(255, 0, 85)';
+        if (ansA.textContent === correctAnswer){
+            buttonA.style.background='rgb(0, 255, 76)'
+        } else if (ansB.textContent === correctAnswer){
+            buttonB.style.background='rgb(0, 255, 76)'
+        } else if (ansC.textContent === correctAnswer){
+            buttonC.style.background='rgb(0, 255, 76)'
+        } else if (ansD.textContent === correctAnswer){
+            buttonD.style.background='rgb(0, 255, 76)'
+        }
     }
+    return
 }
 
-buttonA.addEventListener('click', function() { onButtonClick('ansA', buttonA); });
-buttonB.addEventListener('click', function() { onButtonClick('ansB', buttonB); });
-buttonC.addEventListener('click', function() { onButtonClick('ansC', buttonC); });
-buttonD.addEventListener('click', function() { onButtonClick('ansD', buttonD); });
+buttonA.addEventListener('click', function() {onButtonClick('ansA', buttonA)});
+buttonB.addEventListener('click', function() {onButtonClick('ansB', buttonB)});
+buttonC.addEventListener('click', function() {onButtonClick('ansC', buttonC)});
+buttonD.addEventListener('click', function() {onButtonClick('ansD', buttonD)});
 
 //❌BELLOW ARE TEST BUTTONS, MAKE SURE TO DELETE ALL THIS, AND DELETE THE HTML AND CSS❌
 function hideStartTest(){document.getElementById('start-game-prompt').style.display = 'none';}
