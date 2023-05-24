@@ -92,7 +92,6 @@ const nextButton = document.getElementById('next-question');
 const answerButtons = document.getElementsByClassName('answer-button');
 const ansCheckSpace = document.getElementById('right-wrong');
 
-let correctAnswer = displayedQ.thisQAnswers[0];
 let selectedAns = '';
 const sayCorrect = function(){ansCheckSpace.textContent = '✨✔️✨'};
 const sayIncorrect = function(){ansCheckSpace.textContent = '❌'};
@@ -102,61 +101,63 @@ const buttonB = document.getElementById('button-B');
 const buttonC = document.getElementById('button-C');
 const buttonD = document.getElementById('button-D');
 
-nextButton.addEventListener(
-    'click', function() {
-        clearRightWrong();
-        let hideNextButton = function(){
-            nextButton.style.display = 'none'
+const hideNextButton = function(){nextButton.style.display = 'none'};
+
+const displayEndScreen = function(){
+    document.getElementById('game-questions').style.display = 'none';
+    document.getElementById('end-game-display').style.display = 'block'
+
+}
+
+const displayQuestion = function(){
+    if (x < allQA.length -1){
+        x = x+1;
+        displayedQ = allQA[x];
+        gameQText.textContent = displayedQ.gameQ;
+        shuffle(ansSlotsArray);
+        for (i = 0; i < ansSlotsArray.length; i++){
+            ansSlotsArray[i].textContent = displayedQ.thisQAnswers[i]
         };
-        hideNextButton();
-        if (x < allQA.length -1){
-            x = x+1;
-            displayedQ = allQA[x];
-            gameQText.textContent = displayedQ.gameQ;
-            shuffle(ansSlotsArray);
-            for (i = 0; i < ansSlotsArray.length; i++){
-                ansSlotsArray[i].textContent = displayedQ.thisQAnswers[i]
-            };
-            for (i = 0; i < answerButtons.length; i++){
-                answerButtons[i].style.background = 'rgb(195, 0, 255)'
-            };
-        } else {
-            document.getElementById('game-questions').style.display = 'none';
-            document.getElementById('end-game-display').style.display = 'block'
+        for (i = 0; i < answerButtons.length; i++){
+            answerButtons[i].style.background = 'rgb(195, 0, 255)'
         };
+    } else {
+        displayEndScreen();
+    };
+}
+
+const displayEndButton = function(){
         if(displayedQ == allQA[allQA.length-1]){
-            nextButton.textContent = 'End'
-        }
+        nextButton.textContent = 'End'
     }
-);
+}
 
-function showNextButton(){nextButton.style.display = 'inline'};
-
+const showNextButton = function(){nextButton.style.display = 'inline'};
 let ansA = document.getElementById('ansA');
 let ansB = document.getElementById('ansB');
 let ansC = document.getElementById('ansC');
 let ansD = document.getElementById('ansD');
+let numCorrectAnswers = 0;
+let numIncorrectAnswers = 0;
+let correctAnswer;
 
-buttonA.onclick = function(){console.log(buttonA.onclick=null)};
-
-function onButtonClick(answerId, inputButton) {
+function onAnswerButtonClick(answerId, inputButton) {
     showNextButton();
     correctAnswer = displayedQ.thisQAnswers[0];
     selectedAns = document.getElementById(answerId).textContent;
     console.log('selected answer: ', selectedAns);
     console.log('correct answer: ', correctAnswer);
-//this null thing is nothing. I mean. it doesn't work.
-    buttonA.onClick = null;
-buttonB.onClick = null;
-buttonC.onClick = null;
-buttonD.onClick = null;
     if(selectedAns === correctAnswer){
         console.log('correct');
         sayCorrect(); 
         inputButton.style.background='rgb(0, 255, 76)'
+        numCorrectAnswers++;
+        console.log(numCorrectAnswers);
     } else {
         sayIncorrect();
         console.log('incorrect');
+        numIncorrectAnswers++;
+        console.log(numIncorrectAnswers);
         inputButton.style.background='rgb(255, 0, 85)';
         if (ansA.textContent === correctAnswer){
             buttonA.style.background='rgb(0, 255, 76)'
@@ -168,13 +169,28 @@ buttonD.onClick = null;
             buttonD.style.background='rgb(0, 255, 76)'
         }
     }
-    return
+    buttonA.disabled = true;
+    buttonB.disabled = true;
+    buttonC.disabled = true;
+    buttonD.disabled = true;
 }
 
-buttonA.addEventListener('click', function() {onButtonClick('ansA', buttonA)});
-buttonB.addEventListener('click', function() {onButtonClick('ansB', buttonB)});
-buttonC.addEventListener('click', function() {onButtonClick('ansC', buttonC)});
-buttonD.addEventListener('click', function() {onButtonClick('ansD', buttonD)});
+nextButton.addEventListener('click', function() {
+    clearRightWrong();
+    hideNextButton();
+    displayQuestion();
+    displayEndButton();
+    buttonA.disabled = false;
+    buttonB.disabled = false;
+    buttonC.disabled = false;
+    buttonD.disabled = false;    
+}
+);
+
+buttonA.addEventListener('click', function() {onAnswerButtonClick('ansA', buttonA)});
+buttonB.addEventListener('click', function() {onAnswerButtonClick('ansB', buttonB)});
+buttonC.addEventListener('click', function() {onAnswerButtonClick('ansC', buttonC)});
+buttonD.addEventListener('click', function() {onAnswerButtonClick('ansD', buttonD)});
 
 //❌BELLOW ARE TEST BUTTONS, MAKE SURE TO DELETE ALL THIS, AND DELETE THE HTML AND CSS❌
 function hideStartTest(){document.getElementById('start-game-prompt').style.display = 'none';}
