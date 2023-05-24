@@ -93,9 +93,6 @@ const answerButtons = document.getElementsByClassName('answer-button');
 const ansCheckSpace = document.getElementById('right-wrong');
 
 let selectedAns = '';
-const sayCorrect = function(){ansCheckSpace.textContent = '✨✔️✨'};
-const sayIncorrect = function(){ansCheckSpace.textContent = '❌'};
-let clearRightWrong = function(){ansCheckSpace.textContent = ''};
 const buttonA = document.getElementById('button-A');
 const buttonB = document.getElementById('button-B');
 const buttonC = document.getElementById('button-C');
@@ -103,15 +100,21 @@ const buttonD = document.getElementById('button-D');
 
 const hideNextButton = function(){nextButton.style.display = 'none'};
 
+let numCorrectAnswers = 0;
+let numIncorrectAnswers = 0;
+
+const displayScore = function(){
+    document.getElementById('score').textContent = numCorrectAnswers;
+}
+
 const displayEndScreen = function(){
     document.getElementById('game-questions').style.display = 'none';
     document.getElementById('end-game-display').style.display = 'block'
-
+    displayScore();
 }
 
 const displayQuestion = function(){
-    if (x < allQA.length -1){
-        x = x+1;
+    x = x+1;
         displayedQ = allQA[x];
         gameQText.textContent = displayedQ.gameQ;
         shuffle(ansSlotsArray);
@@ -121,6 +124,11 @@ const displayQuestion = function(){
         for (i = 0; i < answerButtons.length; i++){
             answerButtons[i].style.background = 'rgb(195, 0, 255)'
         };
+}
+
+const displayNextScreen = function(){
+    if (x < allQA.length -1){
+        displayQuestion();
     } else {
         displayEndScreen();
     };
@@ -133,12 +141,13 @@ const displayEndButton = function(){
 }
 
 const showNextButton = function(){nextButton.style.display = 'inline'};
+const sayCorrect = function(){ansCheckSpace.textContent = '✨✔️✨'};
+const sayIncorrect = function(){ansCheckSpace.textContent = '❌'};
+const clearResult = function(){ansCheckSpace.textContent = ''};
 let ansA = document.getElementById('ansA');
 let ansB = document.getElementById('ansB');
 let ansC = document.getElementById('ansC');
 let ansD = document.getElementById('ansD');
-let numCorrectAnswers = 0;
-let numIncorrectAnswers = 0;
 let correctAnswer;
 
 function onAnswerButtonClick(answerId, inputButton) {
@@ -176,15 +185,15 @@ function onAnswerButtonClick(answerId, inputButton) {
 }
 
 nextButton.addEventListener('click', function() {
-    clearRightWrong();
+    clearResult();
     hideNextButton();
-    displayQuestion();
+    displayNextScreen();
     displayEndButton();
     buttonA.disabled = false;
     buttonB.disabled = false;
     buttonC.disabled = false;
     buttonD.disabled = false;    
-}
+    }
 );
 
 buttonA.addEventListener('click', function() {onAnswerButtonClick('ansA', buttonA)});
