@@ -71,6 +71,10 @@ p{
     padding-left: 3%;
 }
 
+.answer-button:disabled{
+    color:black;
+}
+
 .answer-button:hover{
     background-color: rgb(221, 108, 255);
 }
