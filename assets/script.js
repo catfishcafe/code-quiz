@@ -186,7 +186,11 @@ const onAnswerButtonClick = function (answerId, inputButton) {
         console.log(numCorrectAnswers);
     } else {
         sayIncorrect();
-        secondsLeft-=10;
+        if(secondsLeft > 10){
+            secondsLeft-=10;
+        } else{
+            secondsLeft = 1;
+        }
         console.log('incorrect');
         numIncorrectAnswers++;
         console.log(numIncorrectAnswers);
