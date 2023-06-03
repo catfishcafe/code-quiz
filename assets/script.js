@@ -6,10 +6,13 @@ const showQDiv = function() {
     document.getElementById('game-questions').style.display = 'block';
 }
 
+
+
 //TIMER
 
+let secondsLeft = 60;
+
 let setTime = function() {
-    secondsLeft = 60;
     const timerInterval = setInterval(function() {
     secondsLeft--;
     if(secondsLeft === 59){
@@ -25,7 +28,8 @@ let setTime = function() {
         second.textContent = '0' + secondsLeft
     }
     if(secondsLeft === 0) {
-      clearInterval(timerInterval);
+        displayEndScreen();
+        clearInterval(timerInterval);
     }
   }, 1000);
 }
@@ -182,6 +186,7 @@ const onAnswerButtonClick = function (answerId, inputButton) {
         console.log(numCorrectAnswers);
     } else {
         sayIncorrect();
+        secondsLeft-=10;
         console.log('incorrect');
         numIncorrectAnswers++;
         console.log(numIncorrectAnswers);
